@@ -1,3 +1,4 @@
+import logging
 from threading import RLock
 from ahocorasick import Automaton
 from countrytagger.util import text_norm, iter_places
@@ -7,6 +8,7 @@ __version__ = '0.1.1'
 
 AUTOMATA = {}
 compiler_lock = RLock()
+log = logging.getLogger(__name__)
 
 
 def _get_automaton(normalizer):
@@ -14,11 +16,14 @@ def _get_automaton(normalizer):
         if normalizer in AUTOMATA:
             return AUTOMATA.get(normalizer)
         aho = Automaton()
+        count = 0
         for place in iter_places():
             name = place.get('name')
             norm = normalizer(name)
             value = (place.get('code'), place.get('country'))
             aho.add_word(norm, value)
+            count += 1
+        log.info("Country automaton: %d places", count)
         aho.make_automaton()
         AUTOMATA[normalizer] = aho
         return aho
