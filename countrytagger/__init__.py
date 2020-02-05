@@ -3,6 +3,8 @@ from ahocorasick import Automaton
 from countrytagger.util import text_norm, iter_places
 from countrytagger.util import CODES
 
+__version__ = '0.1.0'
+
 AUTOMATA = {}
 compiler_lock = RLock()
 

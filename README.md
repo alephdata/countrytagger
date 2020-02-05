@@ -1,19 +1,31 @@
 # countrytagger
 
+This library finds the names of places in a string of text and tries to associate
+them with countries. The goal is to tag a piece (or set) of text with country
+metadata. The place names are derived from the GeoNames database, and they include
+names of countries, major administrative areas and large cities. Place names that
+are used in several countries are not used.
 
+## Usage
 
+```python
+import countrytagger
 
+# match in a string using sequential matching:
+text = 'I am in Berlin'
+for (code, score, country) in countrytagger.tag_text_countries(text):
+    print(score, country)
 
-## SQL commands
-
-```sql
-SELECT norm, COUNT(*) FROM places GROUP BY norm ORDER BY COUNT(*) DESC LIMIT 30;
+# find precise matches:
+code, score, country = countrytagger.tag_place('Berlin')
 ```
 
-```sql
-SELECT norm, COUNT(DISTINCT country) FROM places GROUP BY norm HAVING COUNT(DISTINCT country) > 1;
+## Building the data
+
+You can re-generate the place database like this:
+
+```bash
+$ make generate
 ```
 
-```sql
-SELECT norm, COUNT(DISTINCT country) FROM places GROUP BY norm ORDER BY COUNT(DISTINCT country) DESC LIMIT 30;
-```
+This will download GeoNames and parse it into the format used by this library.
