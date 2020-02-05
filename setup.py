@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='countrytagger',
-    version='0.1.0',
+    version='0.1.1',
     description="Tag the names of countries and in text.",
     url='https://github.com/alephdata/countrytagger',
     author='OCCRP',
