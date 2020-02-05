@@ -1,1 +1,4 @@
-data/allCountries.zip
+countrytagger/data/allCountries.zip
+dist/
+__pycache__
+*.egg-info
