@@ -46,16 +46,3 @@ def tag_place(place_name, normalizer=text_norm):
         return (code, CODES.get(code, 0.0), country)
     except KeyError:
         return (None, 0.0, None)
-
-
-if __name__ == '__main__':
-    x = "This is a text about Quebec province in Canada."
-    for res in tag_text_countries(x):
-        print(res)
-
-    x = "This is a text about Nicosia in Bavaria."
-    for res in tag_text_countries(x):
-        print(res)
-
-    print(tag_place("Prague.."))
-    print(tag_place("Budapress"))
