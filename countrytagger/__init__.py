@@ -23,7 +23,7 @@ def _get_automaton(normalizer):
             value = (place.get('code'), place.get('country'))
             aho.add_word(norm, value)
             count += 1
-        log.info("Country automaton: %d places", count)
+        log.debug("Country automaton: %d places", count)
         aho.make_automaton()
         AUTOMATA[normalizer] = aho
         return aho
